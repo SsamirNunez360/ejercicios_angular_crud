@@ -16,10 +16,9 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   ingresar() {
-    // Acceso de práctica (simulación educativa con datos ficticios).
     if (this.usuario === 'registro' && this.clave === 'alumnos123') {
       localStorage.setItem('sesionEstudiantes', 'activa');
-      this.router.navigate(['/estudiantes']);
+      this.router.navigate([/estudiantes]);
     } else {
       this.mensaje = 'Usuario o contraseña incorrectos.';
     }
