@@ -1,1 +1,62 @@
-<section class="container"><h2>Registros</h2><form (ngSubmit)="guardar()"><input [(ngModel)]="codigo" name="codigo" placeholder="Código"><input [(ngModel)]="nombre" name="nombre" placeholder="Nombre"><button type="submit">{{ editandoId === null ? 'Guardar' : 'Actualizar' }}</button><button type="button" (click)="nuevo()">Cancelar</button></form><p *ngIf="error">{{ error }}</p><table><thead><tr><th>ID</th><th>Código</th><th>Nombre</th><th>Acciones</th></tr></thead><tbody><tr *ngFor="let item of registros"><td>{{ item.id }}</td><td>{{ item.codigo }}</td><td>{{ item.nombre }}</td><td><button type="button" (click)="editar(item)">Editar</button></td></tr></tbody></table></section>
+<header class="barra">
+  <h2>Registro de mascotas</h2>
+  <button type="button" (click)="cerrarSesion()">Cerrar sesión</button>
+</header>
+
+<form (ngSubmit)="guardar()">
+  <h3>{{ editandoId === null ? 'Nuevo registro' : 'Editar registro ' + editandoId }}</h3>
+  <div class="campos">
+    <div class="campo">
+      <label for="nombre">Nombre</label>
+      <input type="text" [(ngModel)]="mascota.nombre" name="nombre" id="nombre" placeholder="Nombre de la mascota">
+    </div>
+    <div class="campo">
+      <label for="especie">Especie</label>
+      <input type="text" [(ngModel)]="mascota.especie" name="especie" id="especie" placeholder="perro, gato...">
+    </div>
+    <div class="campo">
+      <label for="edad">Edad (años)</label>
+      <input type="number" step="1" [(ngModel)]="mascota.edad" name="edad" id="edad" placeholder="0">
+    </div>
+    <div class="campo">
+      <label for="propietario">Propietario</label>
+      <input type="text" [(ngModel)]="mascota.propietario" name="propietario" id="propietario" placeholder="Nombre del propietario">
+    </div>
+  </div>
+  <div class="acciones">
+    <button type="submit">{{ editandoId === null ? 'Guardar' : 'Actualizar' }}</button>
+    @if (editandoId !== null) {
+      <button type="button" (click)="cancelar()">Cancelar</button>
+    }
+  </div>
+  @if (error) {
+    <p class="error" role="alert">{{ error }}</p>
+  }
+</form>
+
+<p class="total">Total de mascotas: <strong>{{ mascotas.length }}</strong></p>
+
+@if (mascotas.length === 0) {
+  <p class="vacio">No hay mascotas registradas.</p>
+} @else {
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Nombre</th><th>Especie</th><th>Edad (años)</th><th>Propietario</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+      @for (mascota of mascotas; track mascota.id) {
+        <tr>
+          <td>{{ mascota.id }}</td>
+          <td>{{ mascota.nombre }}</td>
+          <td>{{ mascota.especie }}</td>
+          <td>{{ mascota.edad }}</td>
+          <td>{{ mascota.propietario }}</td>
+          <td>
+            <button type="button" (click)="editar(mascota)">Editar</button>
+            <button type="button" (click)="eliminar(mascota)">Eliminar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

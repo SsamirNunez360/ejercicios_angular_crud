@@ -16,9 +16,10 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   ingresar() {
+    // Acceso de práctica (simulación educativa con datos ficticios).
     if (this.usuario === 'veterinario' && this.clave === 'mascotas123') {
       localStorage.setItem('sesionVeterinaria', 'activa');
-      this.router.navigate([/mascotas]);
+      this.router.navigate(['/mascotas']);
     } else {
       this.mensaje = 'Usuario o contraseña incorrectos.';
     }
