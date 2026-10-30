@@ -16,10 +16,9 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   ingresar() {
-    // Acceso de práctica (simulación educativa con datos ficticios).
     if (this.usuario === 'bibliotecario' && this.clave === 'biblio123') {
       localStorage.setItem('sesionBiblioteca', 'activa');
-      this.router.navigate(['/libros']);
+      this.router.navigate([/libros]);
     } else {
       this.mensaje = 'Usuario o contraseña incorrectos.';
     }
