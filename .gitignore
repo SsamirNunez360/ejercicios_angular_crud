@@ -1,0 +1,21 @@
+# Node / Angular
+**/node_modules/
+**/.angular/
+**/.vscode/
+**/dist/
+**/coverage/
+**/.turbo/
+**/.cache/
+**/*.log
+
+# OS files
+.DS_Store
+**/.DS_Store
+
+# Env files
+.env
+.env.*
+
+# npm/yarn/pnpm caches
+.npm/
+.pnpm-store/

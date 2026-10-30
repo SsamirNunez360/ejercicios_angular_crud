@@ -1,0 +1,12 @@
+<form (ngSubmit)="ingresar()">
+  <h2>Agenda de tareas</h2>
+  <h3>Iniciar sesión</h3>
+  <label for="usuario">Usuario</label>
+  <input type="text" id="usuario" name="usuario" [(ngModel)]="usuario" autocomplete="off">
+  <label for="clave">Contraseña</label>
+  <input type="password" id="clave" name="clave" [(ngModel)]="clave" autocomplete="off">
+  <button type="submit">Ingresar</button>
+  @if (mensaje) {
+    <p class="error" role="alert">{{ mensaje }}</p>
+  }
+</form>

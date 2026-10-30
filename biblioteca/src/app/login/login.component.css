@@ -1,0 +1,5 @@
+:host { display: block; max-width: 340px; margin: 3rem auto; font-family: system-ui, sans-serif; }
+form { display: flex; flex-direction: column; gap: .5rem; }
+input { padding: .45rem; font: inherit; }
+button { padding: .5rem; cursor: pointer; }
+.error { color: #b00020; font-weight: 600; }
