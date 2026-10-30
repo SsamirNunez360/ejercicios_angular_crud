@@ -1,65 +1,19 @@
-<header class="barra">
-  <h2>Agenda de tareas</h2>
-  <button type="button" (click)="cerrarSesion()">Cerrar sesión</button>
-</header>
-
-<form (ngSubmit)="guardar()">
-  <h3>{{ editandoId === null ? 'Nuevo registro' : 'Editar registro ' + editandoId }}</h3>
-  <div class="campos">
-    <div class="campo">
-      <label for="titulo">Título</label>
-      <input type="text" [(ngModel)]="tarea.titulo" name="titulo" id="titulo" placeholder="Título de la tarea">
-    </div>
-    <div class="campo">
-      <label for="descripcion">Descripción</label>
-      <textarea [(ngModel)]="tarea.descripcion" name="descripcion" id="descripcion" rows="3" placeholder="Descripción"></textarea>
-    </div>
-    <div class="campo">
-      <label for="fechaLimite">Fecha límite</label>
-      <input type="date" [(ngModel)]="tarea.fechaLimite" name="fechaLimite" id="fechaLimite">
-    </div>
-    <div class="campo">
-      <label for="estado">Estado</label>
-      <select [(ngModel)]="tarea.estado" name="estado" id="estado">
-        <option value="Pendiente">Pendiente</option>
-        <option value="Completada">Completada</option>
-      </select>
-    </div>
-  </div>
-  <div class="acciones">
-    <button type="submit">{{ editandoId === null ? 'Guardar' : 'Actualizar' }}</button>
-    @if (editandoId !== null) {
-      <button type="button" (click)="cancelar()">Cancelar</button>
-    }
-  </div>
-  @if (error) {
-    <p class="error" role="alert">{{ error }}</p>
-  }
-</form>
-
-<p class="total">Total de tareas: <strong>{{ tareas.length }}</strong></p>
-
-@if (tareas.length === 0) {
-  <p class="vacio">No hay tareas registradas.</p>
-} @else {
+<section class="container">
+  <h2>Registros</h2>
   <table>
     <thead>
-      <tr><th>ID</th><th>Título</th><th>Descripción</th><th>Fecha límite</th><th>Estado</th><th>Acciones</th></tr>
+      <tr>
+        <th>ID</th>
+        <th>Código</th>
+        <th>Nombre</th>
+      </tr>
     </thead>
     <tbody>
-      @for (tarea of tareas; track tarea.id) {
-        <tr>
-          <td>{{ tarea.id }}</td>
-          <td>{{ tarea.titulo }}</td>
-          <td>{{ tarea.descripcion }}</td>
-          <td>{{ tarea.fechaLimite }}</td>
-          <td>{{ tarea.estado }}</td>
-          <td>
-            <button type="button" (click)="editar(tarea)">Editar</button>
-            <button type="button" (click)="eliminar(tarea)">Eliminar</button>
-          </td>
-        </tr>
-      }
+      <tr *ngFor="let item of registros">
+        <td>{{ item.id }}</td>
+        <td>{{ item.codigo }}</td>
+        <td>{{ item.nombre }}</td>
+      </tr>
     </tbody>
   </table>
-}
+</section>
