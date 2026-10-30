@@ -1,62 +1,19 @@
-<header class="barra">
-  <h2>Inventario de la tienda</h2>
-  <button type="button" (click)="cerrarSesion()">Cerrar sesión</button>
-</header>
-
-<form (ngSubmit)="guardar()">
-  <h3>{{ editandoId === null ? 'Nuevo registro' : 'Editar registro ' + editandoId }}</h3>
-  <div class="campos">
-    <div class="campo">
-      <label for="codigo">Código</label>
-      <input type="text" [(ngModel)]="producto.codigo" name="codigo" id="codigo" placeholder="P001">
-    </div>
-    <div class="campo">
-      <label for="nombre">Nombre</label>
-      <input type="text" [(ngModel)]="producto.nombre" name="nombre" id="nombre" placeholder="Nombre del producto">
-    </div>
-    <div class="campo">
-      <label for="precio">Precio (L)</label>
-      <input type="number" step="0.01" [(ngModel)]="producto.precio" name="precio" id="precio" placeholder="35.50">
-    </div>
-    <div class="campo">
-      <label for="existencias">Existencias</label>
-      <input type="number" step="1" [(ngModel)]="producto.existencias" name="existencias" id="existencias" placeholder="0">
-    </div>
-  </div>
-  <div class="acciones">
-    <button type="submit">{{ editandoId === null ? 'Guardar' : 'Actualizar' }}</button>
-    @if (editandoId !== null) {
-      <button type="button" (click)="cancelar()">Cancelar</button>
-    }
-  </div>
-  @if (error) {
-    <p class="error" role="alert">{{ error }}</p>
-  }
-</form>
-
-<p class="total">Total de productos: <strong>{{ productos.length }}</strong></p>
-
-@if (productos.length === 0) {
-  <p class="vacio">No hay productos registrados.</p>
-} @else {
+<section class="container">
+  <h2>Registros</h2>
   <table>
     <thead>
-      <tr><th>ID</th><th>Código</th><th>Nombre</th><th>Precio (L)</th><th>Existencias</th><th>Acciones</th></tr>
+      <tr>
+        <th>ID</th>
+        <th>Código</th>
+        <th>Nombre</th>
+      </tr>
     </thead>
     <tbody>
-      @for (producto of productos; track producto.id) {
-        <tr>
-          <td>{{ producto.id }}</td>
-          <td>{{ producto.codigo }}</td>
-          <td>{{ producto.nombre }}</td>
-          <td>L {{ producto.precio.toFixed(2) }}</td>
-          <td>{{ producto.existencias }}</td>
-          <td>
-            <button type="button" (click)="editar(producto)">Editar</button>
-            <button type="button" (click)="eliminar(producto)">Eliminar</button>
-          </td>
-        </tr>
-      }
+      <tr *ngFor="let item of registros">
+        <td>{{ item.id }}</td>
+        <td>{{ item.codigo }}</td>
+        <td>{{ item.nombre }}</td>
+      </tr>
     </tbody>
   </table>
-}
+</section>
