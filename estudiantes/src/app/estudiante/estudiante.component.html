@@ -1,1 +1,62 @@
-<section class="container"><h2>Registros</h2><form (ngSubmit)="guardar()"><input [(ngModel)]="codigo" name="codigo" placeholder="Código"><input [(ngModel)]="nombre" name="nombre" placeholder="Nombre"><button type="submit">{{ editandoId === null ? 'Guardar' : 'Actualizar' }}</button><button type="button" (click)="nuevo()">Cancelar</button></form><p *ngIf="error">{{ error }}</p><table><thead><tr><th>ID</th><th>Código</th><th>Nombre</th><th>Acciones</th></tr></thead><tbody><tr *ngFor="let item of registros"><td>{{ item.id }}</td><td>{{ item.codigo }}</td><td>{{ item.nombre }}</td><td><button type="button" (click)="editar(item)">Editar</button></td></tr></tbody></table></section>
+<header class="barra">
+  <h2>Registro de estudiantes</h2>
+  <button type="button" (click)="cerrarSesion()">Cerrar sesión</button>
+</header>
+
+<form (ngSubmit)="guardar()">
+  <h3>{{ editandoId === null ? 'Nuevo registro' : 'Editar registro ' + editandoId }}</h3>
+  <div class="campos">
+    <div class="campo">
+      <label for="cuenta">Cuenta</label>
+      <input type="text" [(ngModel)]="estudiante.cuenta" name="cuenta" id="cuenta" placeholder="0000001">
+    </div>
+    <div class="campo">
+      <label for="nombre">Nombre</label>
+      <input type="text" [(ngModel)]="estudiante.nombre" name="nombre" id="nombre" placeholder="Nombre completo">
+    </div>
+    <div class="campo">
+      <label for="carrera">Carrera</label>
+      <input type="text" [(ngModel)]="estudiante.carrera" name="carrera" id="carrera" placeholder="Carrera">
+    </div>
+    <div class="campo">
+      <label for="fechaIngreso">Fecha de ingreso</label>
+      <input type="date" [(ngModel)]="estudiante.fechaIngreso" name="fechaIngreso" id="fechaIngreso">
+    </div>
+  </div>
+  <div class="acciones">
+    <button type="submit">{{ editandoId === null ? 'Guardar' : 'Actualizar' }}</button>
+    @if (editandoId !== null) {
+      <button type="button" (click)="cancelar()">Cancelar</button>
+    }
+  </div>
+  @if (error) {
+    <p class="error" role="alert">{{ error }}</p>
+  }
+</form>
+
+<p class="total">Total de estudiantes: <strong>{{ estudiantes.length }}</strong></p>
+
+@if (estudiantes.length === 0) {
+  <p class="vacio">No hay estudiantes registrados.</p>
+} @else {
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Cuenta</th><th>Nombre</th><th>Carrera</th><th>Fecha de ingreso</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+      @for (estudiante of estudiantes; track estudiante.id) {
+        <tr>
+          <td>{{ estudiante.id }}</td>
+          <td>{{ estudiante.cuenta }}</td>
+          <td>{{ estudiante.nombre }}</td>
+          <td>{{ estudiante.carrera }}</td>
+          <td>{{ estudiante.fechaIngreso }}</td>
+          <td>
+            <button type="button" (click)="editar(estudiante)">Editar</button>
+            <button type="button" (click)="eliminar(estudiante)">Eliminar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
